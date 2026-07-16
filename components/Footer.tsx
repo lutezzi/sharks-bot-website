@@ -2,6 +2,7 @@ import Image from "next/image";
 import Link from "next/link";
 import type { Locale } from "@/lib/config";
 import { siteConfig } from "@/lib/config";
+import { localePath } from "@/lib/paths";
 import type { Dictionary } from "@/lib/i18n";
 
 type FooterProps = {
@@ -30,10 +31,10 @@ export function Footer({ locale, dict }: FooterProps) {
         </div>
 
         <div className="flex flex-wrap gap-4 text-sm">
-          <Link href={`/${locale}/terms-of-use`} className="text-zinc-400 transition hover:text-white">
+          <Link href={localePath(locale, "/terms-of-use")} className="text-zinc-400 transition hover:text-white">
             {dict.footer.terms}
           </Link>
-          <Link href={`/${locale}/privacy-policy`} className="text-zinc-400 transition hover:text-white">
+          <Link href={localePath(locale, "/privacy-policy")} className="text-zinc-400 transition hover:text-white">
             {dict.footer.privacy}
           </Link>
           <a

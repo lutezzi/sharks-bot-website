@@ -7,6 +7,8 @@ import { MenuIcon, type MenuIconName } from "@/components/NavIcons";
 import type { Locale } from "@/lib/config";
 import { getExternalDocsUrl } from "@/lib/docs-content";
 import type { Dictionary } from "@/lib/i18n";
+import { localeHome, localePath, switchLocalePath } from "@/lib/paths";
+import { usePathname } from "next/navigation";
 
 type RichMenuItem = {
   title: string;
@@ -27,9 +29,9 @@ function resolveHref(href: string, locale: Locale, githubUrl: string): { url: st
     return { url: `${githubUrl}/issues`, external: true };
   }
   if (href.startsWith("#")) {
-    return { url: `/${locale}${href}`, external: false };
+    return { url: localePath(locale, href), external: false };
   }
-  return { url: `/${locale}${href}`, external: false };
+  return { url: localePath(locale, href), external: false };
 }
 
 function MegaMenuItem({ item, onNavigate }: { item: RichMenuItem; onNavigate: () => void }) {
@@ -152,6 +154,7 @@ function buildMenuItems(
 }
 
 export function Navbar({ locale, dict, inviteUrl, githubUrl }: NavbarProps) {
+  const pathname = usePathname();
   const otherLocale = locale === "tr" ? "en" : "tr";
   const featureItems = buildMenuItems(dict.featuresMenu, locale, githubUrl);
   const resourceItems = buildMenuItems(dict.resourcesMenu, locale, githubUrl);
@@ -159,7 +162,7 @@ export function Navbar({ locale, dict, inviteUrl, githubUrl }: NavbarProps) {
   return (
     <header className="sticky top-0 z-40 border-b border-white/10 bg-[#0c0a12]/80 backdrop-blur-xl">
       <nav className="mx-auto flex max-w-6xl items-center justify-between px-6 py-4">
-        <Link href={`/${locale}`} className="flex items-center gap-2.5 text-lg font-semibold text-white">
+        <Link href={localeHome(locale)} className="flex items-center gap-2.5 text-lg font-semibold text-white">
           <Image
             src="/assets/logo.png"
             alt="sharks"
@@ -178,7 +181,7 @@ export function Navbar({ locale, dict, inviteUrl, githubUrl }: NavbarProps) {
 
         <div className="flex items-center gap-2">
           <Link
-            href={`/${otherLocale}`}
+            href={switchLocalePath(pathname, locale, otherLocale)}
             className="hidden rounded-lg px-3 py-2 text-sm font-medium text-zinc-400 transition hover:text-white sm:inline-flex"
           >
             {otherLocale.toUpperCase()}

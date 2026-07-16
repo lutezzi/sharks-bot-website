@@ -56,7 +56,7 @@ export function DocsHeader({ locale }: { locale: Locale }) {
           </Link>
           <span className="hidden text-zinc-600 sm:inline">/</span>
           <Link
-            href={`${mainSiteUrl}/${locale}`}
+            href={`${mainSiteUrl}${locale === "tr" ? "" : "/en"}`}
             className="hidden text-sm text-zinc-400 transition hover:text-white sm:inline"
           >
             {siteConfig.domain}

@@ -12,8 +12,15 @@ export function middleware(request: NextRequest) {
 
   // docs.sharksbot.site → internal /docs/... routes
   if (isDocsHost(host)) {
+    // Rewrite sonrası middleware tekrar calisir; /docs/... yolunu oldugu gibi birak
+    if (pathname.startsWith("/docs")) {
+      return NextResponse.next();
+    }
+
     if (pathname === "/") {
-      return NextResponse.rewrite(new URL(`/docs/${defaultLocale}`, request.url));
+      const url = request.nextUrl.clone();
+      url.pathname = `/docs/${defaultLocale}`;
+      return NextResponse.rewrite(url);
     }
 
     const localeMatch = locales.find(
@@ -21,10 +28,14 @@ export function middleware(request: NextRequest) {
     );
 
     if (localeMatch) {
-      return NextResponse.rewrite(new URL(`/docs${pathname}`, request.url));
+      const url = request.nextUrl.clone();
+      url.pathname = `/docs${pathname}`;
+      return NextResponse.rewrite(url);
     }
 
-    return NextResponse.rewrite(new URL(`/docs/${defaultLocale}${pathname}`, request.url));
+    const url = request.nextUrl.clone();
+    url.pathname = `/docs/${defaultLocale}${pathname}`;
+    return NextResponse.rewrite(url);
   }
 
   // Main site: /docs → /docs/tr

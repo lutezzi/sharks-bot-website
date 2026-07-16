@@ -10,6 +10,10 @@ function stripPort(host: string) {
   return host.split(":")[0];
 }
 
+function isLocalePath(pathname: string, locale: string) {
+  return pathname === `/${locale}` || pathname.startsWith(`/${locale}/`);
+}
+
 export function middleware(request: NextRequest) {
   const { pathname } = request.nextUrl;
   const host = request.headers.get("host") ?? "";
@@ -34,9 +38,7 @@ export function middleware(request: NextRequest) {
       return NextResponse.rewrite(url);
     }
 
-    const localeMatch = locales.find(
-      (locale) => pathname === `/${locale}` || pathname.startsWith(`/${locale}/`)
-    );
+    const localeMatch = locales.find((locale) => isLocalePath(pathname, locale));
 
     if (localeMatch) {
       const url = request.nextUrl.clone();
@@ -60,30 +62,24 @@ export function middleware(request: NextRequest) {
     return NextResponse.next();
   }
 
-  // /tr/* → clean URL without /tr (canonical Turkish URLs)
-  if (pathname === "/tr" || pathname === "/tr/") {
-    return NextResponse.redirect(new URL("/", request.url), 308);
+  // Internal /tr routes (direct access or after rewrite — do NOT redirect)
+  if (isLocalePath(pathname, defaultLocale)) {
+    return NextResponse.next();
   }
 
-  if (pathname.startsWith("/tr/")) {
-    return NextResponse.redirect(new URL(pathname.replace(/^\/tr/, "") || "/", request.url), 308);
+  // English routes
+  if (isLocalePath(pathname, "en")) {
+    return NextResponse.next();
   }
 
-  const isEnglishPath = pathname === "/en" || pathname.startsWith("/en/");
-
-  // Homepage: sharksbot.site/ (rewrite, URL stays /)
+  // Homepage: sharksbot.site/ → serve /tr, URL stays /
   if (pathname === "/") {
     const url = request.nextUrl.clone();
     url.pathname = `/${defaultLocale}`;
     return NextResponse.rewrite(url);
   }
 
-  // English paths pass through
-  if (isEnglishPath) {
-    return NextResponse.next();
-  }
-
-  // Other Turkish pages without /tr prefix: /commands → /tr/commands (rewrite)
+  // Turkish pages without /tr prefix: /commands → /tr/commands (rewrite)
   const url = request.nextUrl.clone();
   url.pathname = `/${defaultLocale}${pathname}`;
   return NextResponse.rewrite(url);

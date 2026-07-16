@@ -26,7 +26,7 @@ function resolveHref(href: string, locale: Locale, githubUrl: string): { url: st
     return { url: getExternalDocsUrl(locale), external: true };
   }
   if (href === "external:support") {
-    return { url: `${githubUrl}/issues`, external: true };
+    return { url: "https://discord.com/users/852608635203878912", external: true };
   }
   if (href.startsWith("#")) {
     return { url: localePath(locale, href), external: false };

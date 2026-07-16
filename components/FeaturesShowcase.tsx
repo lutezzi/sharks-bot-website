@@ -1,5 +1,6 @@
 "use client";
 
+import { useEffect } from "react";
 import { FeatureMockup } from "@/components/FeatureMockup";
 import { MenuIcon } from "@/components/NavIcons";
 import { ScrollReveal } from "@/components/ScrollReveal";
@@ -18,6 +19,18 @@ function getCtaHref(locale: Locale, slug: string) {
 }
 
 export function FeaturesShowcase({ sections, locale }: FeaturesShowcaseProps) {
+  useEffect(() => {
+    const hash = window.location.hash.slice(1);
+    if (!hash) return;
+
+    const element = document.getElementById(hash);
+    if (!element) return;
+
+    requestAnimationFrame(() => {
+      element.scrollIntoView({ behavior: "smooth" });
+    });
+  }, []);
+
   return (
     <section id="features" className="px-6 py-8 md:py-12">
       <div className="mx-auto max-w-6xl space-y-28 md:space-y-36">
@@ -29,7 +42,8 @@ export function FeaturesShowcase({ sections, locale }: FeaturesShowcaseProps) {
           return (
             <div
               key={section.mockup}
-              className="grid items-center gap-12 lg:grid-cols-2 lg:gap-16"
+              id={section.mockup}
+              className="scroll-mt-24 grid items-center gap-12 lg:grid-cols-2 lg:gap-16"
             >
               <ScrollReveal direction={textDirection} className={reversed ? "lg:order-2" : ""}>
                 <div className="max-w-lg">

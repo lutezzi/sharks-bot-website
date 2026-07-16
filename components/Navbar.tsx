@@ -34,6 +34,24 @@ function resolveHref(href: string, locale: Locale, githubUrl: string): { url: st
   return { url: localePath(locale, href), external: false };
 }
 
+function scrollToHash(href: string) {
+  const hashIndex = href.indexOf("#");
+  if (hashIndex === -1) return false;
+
+  const targetPath = href.slice(0, hashIndex) || "/";
+  const hash = href.slice(hashIndex + 1);
+  const currentPath = window.location.pathname;
+
+  if (targetPath !== currentPath) return false;
+
+  const element = document.getElementById(hash);
+  if (!element) return false;
+
+  element.scrollIntoView({ behavior: "smooth" });
+  window.history.pushState(null, "", href);
+  return true;
+}
+
 function MegaMenuItem({ item, onNavigate }: { item: RichMenuItem; onNavigate: () => void }) {
   const content = (
     <>
@@ -65,7 +83,16 @@ function MegaMenuItem({ item, onNavigate }: { item: RichMenuItem; onNavigate: ()
   }
 
   return (
-    <Link href={item.href} className={className} onClick={onNavigate}>
+    <Link
+      href={item.href}
+      className={className}
+      onClick={(event) => {
+        if (scrollToHash(item.href)) {
+          event.preventDefault();
+        }
+        onNavigate();
+      }}
+    >
       {content}
     </Link>
   );

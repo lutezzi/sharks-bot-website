@@ -38,37 +38,37 @@ export const tr = {
     welcome: {
       title: "Karşılama Mesajları",
       description: "Yeni üyeleri tarzla karşılayın, ayrılmaları bildirin.",
-      href: "#features",
+      href: "#welcome",
       icon: "welcome" as const,
     },
     roles: {
       title: "Rol Menüleri",
       description: "Renk, cinsiyet ve ilgi alanı rolleri için dropdown menüler.",
-      href: "#features",
+      href: "#roles",
       icon: "roles" as const,
     },
     moderation: {
       title: "Moderasyon",
       description: "Ban, kick, mute ve toplu mesaj silme araçları.",
-      href: "#features",
+      href: "#moderation",
       icon: "moderation" as const,
     },
     utility: {
       title: "Gömülü Mesajlar",
       description: "Kurallar, bilgi komutları ve şık embed mesajları.",
-      href: "#features",
+      href: "#embed",
       icon: "embed" as const,
     },
     setup: {
       title: "Kolay Kurulum",
       description: "/setup ile hoş geldin kanallarını saniyeler içinde ayarlayın.",
-      href: "#features",
+      href: "#setup",
       icon: "setup" as const,
     },
     voice: {
       title: "Ses Kanalı",
       description: "/join ve /leave ile botu sesli kanala davet edin.",
-      href: "#features",
+      href: "#voice",
       icon: "voice" as const,
     },
   },
@@ -103,16 +103,6 @@ export const tr = {
   features: {
     sections: [
       {
-        icon: "embed",
-        label: "GÖMÜLÜ MESAJLAR",
-        title: "Sunucunuz için kolayca gömülü mesajlar oluşturun!",
-        description:
-          "sharks'ın basit özelleştirmesini kullanarak kurallar, duyurular ve bilgi mesajlarını tercih ettiğiniz kanala gönderin.",
-        cta: "Gömülü mesajlar hakkında daha fazla bilgi edinin",
-        ctaSlug: "commands",
-        mockup: "embed",
-      },
-      {
         icon: "welcome",
         label: "KARŞILAMA MESAJLARI",
         title: "Yeni üyeleri tarzla karşılayın",
@@ -141,6 +131,16 @@ export const tr = {
         cta: "Moderasyon hakkında daha fazla bilgi edinin",
         ctaSlug: "moderation",
         mockup: "moderation",
+      },
+      {
+        icon: "embed",
+        label: "GÖMÜLÜ MESAJLAR",
+        title: "Sunucunuz için kolayca gömülü mesajlar oluşturun!",
+        description:
+          "sharks'ın basit özelleştirmesini kullanarak kurallar, duyurular ve bilgi mesajlarını tercih ettiğiniz kanala gönderin.",
+        cta: "Gömülü mesajlar hakkında daha fazla bilgi edinin",
+        ctaSlug: "commands",
+        mockup: "embed",
       },
       {
         icon: "setup",
@@ -203,37 +203,37 @@ export const en: Dictionary = {
     welcome: {
       title: "Welcome Messages",
       description: "Greet new members in style and announce departures.",
-      href: "#features",
+      href: "#welcome",
       icon: "welcome" as const,
     },
     roles: {
       title: "Role Menus",
       description: "Dropdown menus for color, gender, and interest roles.",
-      href: "#features",
+      href: "#roles",
       icon: "roles" as const,
     },
     moderation: {
       title: "Moderation",
       description: "Ban, kick, mute, and bulk message deletion tools.",
-      href: "#features",
+      href: "#moderation",
       icon: "moderation" as const,
     },
     utility: {
       title: "Embedded Messages",
       description: "Rules, info commands, and polished embed messages.",
-      href: "#features",
+      href: "#embed",
       icon: "embed" as const,
     },
     setup: {
       title: "Easy Setup",
       description: "Configure welcome channels in seconds with /setup.",
-      href: "#features",
+      href: "#setup",
       icon: "setup" as const,
     },
     voice: {
       title: "Voice Channel",
       description: "Invite the bot to voice with /join and /leave.",
-      href: "#features",
+      href: "#voice",
       icon: "voice" as const,
     },
   },
@@ -268,16 +268,6 @@ export const en: Dictionary = {
   features: {
     sections: [
       {
-        icon: "embed",
-        label: "EMBEDDED MESSAGES",
-        title: "Easily create embedded messages for your server!",
-        description:
-          "Use sharks' simple customization to send rules, announcements, and info messages to any channel you choose.",
-        cta: "Learn more about embedded messages",
-        ctaSlug: "commands",
-        mockup: "embed",
-      },
-      {
         icon: "welcome",
         label: "WELCOME MESSAGES",
         title: "Welcome new members in style",
@@ -306,6 +296,16 @@ export const en: Dictionary = {
         cta: "Learn more about moderation",
         ctaSlug: "moderation",
         mockup: "moderation",
+      },
+      {
+        icon: "embed",
+        label: "EMBEDDED MESSAGES",
+        title: "Easily create embedded messages for your server!",
+        description:
+          "Use sharks' simple customization to send rules, announcements, and info messages to any channel you choose.",
+        cta: "Learn more about embedded messages",
+        ctaSlug: "commands",
+        mockup: "embed",
       },
       {
         icon: "setup",

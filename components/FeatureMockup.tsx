@@ -1,3 +1,4 @@
+import Image from "next/image";
 import type { FeatureMockupType } from "@/lib/i18n";
 
 type FeatureMockupProps = {
@@ -12,10 +13,19 @@ function Sparkle({ className }: { className?: string }) {
   );
 }
 
-function BotAvatar() {
+function BotAvatar({ size = 40 }: { size?: number }) {
   return (
-    <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-[#5865F2] text-sm font-bold text-white">
-      S
+    <div
+      className="relative shrink-0 overflow-hidden rounded-full"
+      style={{ width: size, height: size }}
+    >
+      <Image
+        src="/assets/logo.png"
+        alt="sharks"
+        fill
+        className="object-cover"
+        sizes={`${size}px`}
+      />
     </div>
   );
 }
@@ -194,9 +204,7 @@ function VoiceMockup() {
   return (
     <MockupShell sparkleClassName="text-violet-400">
       <div className="flex flex-col items-center py-4">
-        <div className="flex h-20 w-20 items-center justify-center rounded-full bg-[#5865F2]/20 text-3xl">
-          🎧
-        </div>
+        <BotAvatar size={80} />
         <p className="mt-4 text-sm font-semibold text-white">Genel Ses</p>
         <p className="mt-1 text-xs text-zinc-400">sharks bağlandı</p>
         <div className="mt-6 flex gap-2">

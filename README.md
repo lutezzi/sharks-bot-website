@@ -11,8 +11,11 @@ Official website for the **sharks** Discord bot. Built with Next.js (App Router)
 | `/tr/commands` | Command list by category |
 | `/tr/terms-of-use` | Terms of Use (Discord verification) |
 | `/tr/privacy-policy` | Privacy Policy (Discord verification) |
+| `/docs/tr` | Documentation (also via subdomain) |
 
 English versions use `/en/...` instead of `/tr/...`.
+
+Documentation is also available at **`https://docs.sharksbot.xyz`** (subdomain).
 
 ## Local development
 
@@ -42,6 +45,18 @@ After deployment, Vercel gives you a URL like `sharks-bot-website.vercel.app`.
 2. In Vercel: Project → **Settings** → **Domains** → add `sharksbot.xyz` and `www.sharksbot.xyz`.
 3. Add the DNS records Vercel shows at your registrar.
 4. Wait for propagation (usually minutes, sometimes up to 48h).
+
+## Docs subdomain (docs.sharksbot.xyz)
+
+The documentation lives in the same Vercel project. Middleware routes the `docs.` subdomain to `/docs/...` internally.
+
+1. In Vercel: Project → **Settings** → **Domains** → add `docs.sharksbot.xyz`.
+2. At your domain registrar, add the DNS record Vercel provides (usually a **CNAME** pointing to `cname.vercel-dns.com`).
+3. Optional env vars:
+   - `NEXT_PUBLIC_DOCS_URL=https://docs.sharksbot.xyz`
+   - `NEXT_PUBLIC_SITE_URL=https://sharksbot.xyz`
+
+Until the subdomain is configured, docs work at `/docs/tr` on the main domain.
 
 ## Discord Developer Portal
 

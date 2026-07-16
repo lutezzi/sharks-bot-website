@@ -63,7 +63,7 @@ export const tr = {
     docs: {
       title: "Dökümanlar",
       description: "Yararlı kılavuzlar ve kurulum bilgileri.",
-      href: "external:github",
+      href: "external:docs",
       icon: "docs" as const,
     },
     support: {
@@ -200,7 +200,7 @@ export const en: Dictionary = {
     docs: {
       title: "Documentation",
       description: "Helpful guides and setup instructions.",
-      href: "external:github",
+      href: "external:docs",
       icon: "docs" as const,
     },
     support: {

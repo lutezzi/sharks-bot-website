@@ -5,6 +5,7 @@ import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
 import { MenuIcon, type MenuIconName } from "@/components/NavIcons";
 import type { Locale } from "@/lib/config";
+import { getExternalDocsUrl } from "@/lib/docs-content";
 import type { Dictionary } from "@/lib/i18n";
 
 type RichMenuItem = {
@@ -18,6 +19,9 @@ type RichMenuItem = {
 function resolveHref(href: string, locale: Locale, githubUrl: string): { url: string; external: boolean } {
   if (href === "external:github") {
     return { url: githubUrl, external: true };
+  }
+  if (href === "external:docs") {
+    return { url: getExternalDocsUrl(locale), external: true };
   }
   if (href === "external:support") {
     return { url: `${githubUrl}/issues`, external: true };

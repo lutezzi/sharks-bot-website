@@ -59,7 +59,7 @@ export function DocsHeader({ locale }: { locale: Locale }) {
             href={`${mainSiteUrl}/${locale}`}
             className="hidden text-sm text-zinc-400 transition hover:text-white sm:inline"
           >
-            sharksbot.xyz
+            {siteConfig.domain}
           </Link>
         </div>
         <div className="flex items-center gap-3">

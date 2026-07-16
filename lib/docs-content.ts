@@ -528,7 +528,7 @@ export function getDocsBaseUrl() {
   if (process.env.NEXT_PUBLIC_DOCS_URL) {
     return process.env.NEXT_PUBLIC_DOCS_URL.replace(/\/$/, "");
   }
-  const domain = process.env.NEXT_PUBLIC_SITE_DOMAIN ?? "sharks-bot-website.vercel.app";
+  const domain = process.env.NEXT_PUBLIC_SITE_DOMAIN ?? "sharksbot.site";
   return `https://docs.${domain}`;
 }
 

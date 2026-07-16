@@ -10,7 +10,7 @@ export function middleware(request: NextRequest) {
   const { pathname } = request.nextUrl;
   const host = request.headers.get("host") ?? "";
 
-  // docs.sharksbot.xyz → internal /docs/... routes
+  // docs.sharksbot.site → internal /docs/... routes
   if (isDocsHost(host)) {
     if (pathname === "/") {
       return NextResponse.rewrite(new URL(`/docs/${defaultLocale}`, request.url));

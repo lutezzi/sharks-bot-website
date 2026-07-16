@@ -15,7 +15,7 @@ Official website for the **sharks** Discord bot. Built with Next.js (App Router)
 
 English versions use `/en/...` instead of `/tr/...`.
 
-Documentation is also available at **`https://docs.sharksbot.xyz`** (subdomain).
+Documentation is also available at **`https://docs.sharksbot.site`** (subdomain).
 
 ## Local development
 
@@ -33,52 +33,83 @@ Open [http://localhost:3000/tr](http://localhost:3000/tr).
 1. Push this folder to a **separate GitHub repository** (e.g. `sharks-bot-website`).
 2. Go to [vercel.com/new](https://vercel.com/new) and import the repo.
 3. Framework preset: **Next.js** (auto-detected).
-4. Add environment variable:
+4. Add environment variables:
    - `NEXT_PUBLIC_DISCORD_CLIENT_ID` = your bot's Application ID
+   - `NEXT_PUBLIC_SITE_URL` = `https://sharksbot.site`
+   - `NEXT_PUBLIC_SITE_DOMAIN` = `sharksbot.site`
+   - `NEXT_PUBLIC_DOCS_URL` = `https://docs.sharksbot.site`
 5. Deploy.
 
 After deployment, Vercel gives you a URL like `sharks-bot-website.vercel.app`.
 
-## Custom domain (sharksbot.xyz)
+## Custom domain (sharksbot.site) — Hostinger + Vercel
 
-1. Buy the domain from your registrar.
-2. In Vercel: Project → **Settings** → **Domains** → add `sharksbot.xyz` and `www.sharksbot.xyz`.
-3. Add the DNS records Vercel shows at your registrar.
-4. Wait for propagation (usually minutes, sometimes up to 48h).
+### 1. Vercel'de domain ekle
 
-## Docs subdomain (docs.sharksbot.xyz)
+1. [vercel.com](https://vercel.com) → projen → **Settings** → **Domains**
+2. Şu domainleri ekle:
+   - `sharksbot.site`
+   - `www.sharksbot.site`
+   - `docs.sharksbot.site`
+3. Vercel her domain için hangi DNS kaydını girmen gerektiğini gösterecek.
+
+### 2. Hostinger DNS ayarları
+
+1. [Hostinger](https://www.hostinger.com) → **Domains** → `sharksbot.site` → **DNS / DNS Zone**
+2. Vercel'in verdiği kayıtları ekle:
+
+**Ana domain (`sharksbot.site`):**
+
+| Type | Name | Value |
+|---|---|---|
+| `A` | `@` | `76.76.21.21` |
+
+**www:**
+
+| Type | Name | Value |
+|---|---|---|
+| `CNAME` | `www` | `cname.vercel-dns.com` |
+
+**Docs subdomain:**
+
+| Type | Name | Value |
+|---|---|---|
+| `CNAME` | `docs` | `cname.vercel-dns.com` |
+
+> Hostinger'da eski `@` A kaydı veya çakışan kayıtlar varsa sil; sadece Vercel'in istediği kayıtlar kalsın.
+
+### 3. Vercel'de yönlendirme (önerilen)
+
+Domains sayfasında:
+- `www.sharksbot.site` → **Redirect** to `sharksbot.site` (307)
+- `sharksbot.site` → Production
+
+### 4. SSL bekle
+
+DNS yayıldıktan sonra Vercel otomatik HTTPS sertifikası verir (genelde 5–30 dk, bazen birkaç saat).
+
+### 5. Discord Developer Portal
+
+Bot doğrulama için:
+
+- **Terms of Service:** `https://sharksbot.site/tr/terms-of-use`
+- **Privacy Policy:** `https://sharksbot.site/tr/privacy-policy`
+
+## Docs subdomain (docs.sharksbot.site)
 
 The documentation lives in the same Vercel project. Middleware routes the `docs.` subdomain to `/docs/...` internally.
 
-1. In Vercel: Project → **Settings** → **Domains** → add `docs.sharksbot.xyz`.
-2. At your domain registrar, add the DNS record Vercel provides (usually a **CNAME** pointing to `cname.vercel-dns.com`).
-3. Optional env vars:
-   - `NEXT_PUBLIC_DOCS_URL=https://docs.sharksbot.xyz`
-   - `NEXT_PUBLIC_SITE_URL=https://sharksbot.xyz`
-
-Until the subdomain is configured, docs work at `/docs/tr` on the main domain.
-
-## Discord Developer Portal
-
-For bot verification, set these URLs in your application:
-
-- **Terms of Service:** `https://sharksbot.xyz/tr/terms-of-use`
-- **Privacy Policy:** `https://sharksbot.xyz/tr/privacy-policy`
-
-Use `/en/...` URLs if you prefer English as the primary legal language.
+Until DNS propagates, docs also work at `/docs/tr` on the main domain.
 
 ## Project structure
 
 ```
 app/
   [locale]/           # tr / en routes
-    page.tsx          # Homepage
-    commands/         # Command reference
-    terms-of-use/
-    privacy-policy/
-components/           # Navbar, Footer, Hero, etc.
-lib/                  # i18n, commands data, config
-middleware.ts         # Redirect / → /tr
+  docs/[locale]/      # documentation
+components/
+lib/
+middleware.ts
 ```
 
 ## Related repo

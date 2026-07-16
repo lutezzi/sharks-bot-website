@@ -5,7 +5,7 @@ export const defaultLocale: Locale = "tr";
 
 export const siteConfig = {
   name: "sharks",
-  domain: "sharksbot.xyz",
+  domain: "sharksbot.site",
   author: "lutezzi",
   githubUrl: "https://github.com/lutezzi/",
 };

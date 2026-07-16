@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
 import type { Locale } from "@/lib/config";
@@ -105,8 +106,15 @@ export function Navbar({ locale, dict, inviteUrl, githubUrl }: NavbarProps) {
   return (
     <header className="sticky top-0 z-40 border-b border-white/10 bg-[#0c0a12]/80 backdrop-blur-xl">
       <nav className="mx-auto flex max-w-6xl items-center justify-between px-6 py-4">
-        <Link href={`/${locale}`} className="flex items-center gap-2 text-lg font-semibold text-white">
-          <span className="text-2xl">🦈</span>
+        <Link href={`/${locale}`} className="flex items-center gap-2.5 text-lg font-semibold text-white">
+          <Image
+            src="/assets/logo.png"
+            alt="sharks"
+            width={32}
+            height={32}
+            className="h-8 w-8 rounded-lg object-cover"
+            priority
+          />
           <span>sharks</span>
         </Link>
 

@@ -6,10 +6,6 @@ function isDocsHost(host: string) {
   return host.startsWith("docs.") || host.startsWith("docs.localhost");
 }
 
-function stripPort(host: string) {
-  return host.split(":")[0];
-}
-
 function isLocalePath(pathname: string, locale: string) {
   return pathname === `/${locale}` || pathname.startsWith(`/${locale}/`);
 }
@@ -17,15 +13,6 @@ function isLocalePath(pathname: string, locale: string) {
 export function middleware(request: NextRequest) {
   const { pathname } = request.nextUrl;
   const host = request.headers.get("host") ?? "";
-  const hostname = stripPort(host);
-
-  // www.sharksbot.site → sharksbot.site
-  if (hostname.startsWith("www.")) {
-    const url = request.nextUrl.clone();
-    url.hostname = hostname.slice(4);
-    return NextResponse.redirect(url, 308);
-  }
-
   // docs.sharksbot.site → internal /docs/... routes
   if (isDocsHost(host)) {
     if (pathname.startsWith("/docs")) {

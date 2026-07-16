@@ -1,3 +1,4 @@
+import Image from "next/image";
 import Link from "next/link";
 import type { Locale } from "@/lib/config";
 import { siteConfig } from "@/lib/config";
@@ -15,7 +16,16 @@ export function Footer({ locale, dict }: FooterProps) {
     <footer className="mt-auto border-t border-white/10 bg-[#0c0a12]">
       <div className="mx-auto flex max-w-6xl flex-col gap-6 px-6 py-10 md:flex-row md:items-center md:justify-between">
         <div>
-          <p className="text-sm font-medium text-white">🦈 sharks</p>
+          <div className="flex items-center gap-2.5">
+            <Image
+              src="/assets/logo.png"
+              alt="sharks"
+              width={28}
+              height={28}
+              className="h-7 w-7 rounded-lg object-cover"
+            />
+            <p className="text-sm font-medium text-white">sharks</p>
+          </div>
           <p className="mt-1 text-sm text-zinc-500">{dict.footer.tagline}</p>
         </div>
 

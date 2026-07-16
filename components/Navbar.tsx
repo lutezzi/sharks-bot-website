@@ -3,22 +3,75 @@
 import Image from "next/image";
 import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
+import { MenuIcon, type MenuIconName } from "@/components/NavIcons";
 import type { Locale } from "@/lib/config";
 import type { Dictionary } from "@/lib/i18n";
 
-type MenuItem = {
-  label: string;
+type RichMenuItem = {
+  title: string;
+  description: string;
   href: string;
+  icon: MenuIconName;
   external?: boolean;
 };
 
-type NavDropdownProps = {
+function resolveHref(href: string, locale: Locale, githubUrl: string): { url: string; external: boolean } {
+  if (href === "external:github") {
+    return { url: githubUrl, external: true };
+  }
+  if (href === "external:support") {
+    return { url: `${githubUrl}/issues`, external: true };
+  }
+  if (href.startsWith("#")) {
+    return { url: `/${locale}${href}`, external: false };
+  }
+  return { url: `/${locale}${href}`, external: false };
+}
+
+function MegaMenuItem({ item, onNavigate }: { item: RichMenuItem; onNavigate: () => void }) {
+  const content = (
+    <>
+      <span className="mt-0.5 flex h-9 w-9 shrink-0 items-center justify-center rounded-lg border border-white/10 bg-white/[0.04] text-zinc-300">
+        <MenuIcon name={item.icon} className="h-5 w-5" />
+      </span>
+      <span className="min-w-0">
+        <span className="block text-sm font-semibold text-white">{item.title}</span>
+        <span className="mt-0.5 block text-xs leading-5 text-zinc-500">{item.description}</span>
+      </span>
+    </>
+  );
+
+  const className =
+    "flex gap-3 rounded-xl px-3 py-3 transition hover:bg-white/[0.06] focus-visible:outline focus-visible:outline-2 focus-visible:outline-[#c9b6e4]/50";
+
+  if (item.external) {
+    return (
+      <a
+        href={item.href}
+        target="_blank"
+        rel="noopener noreferrer"
+        className={className}
+        onClick={onNavigate}
+      >
+        {content}
+      </a>
+    );
+  }
+
+  return (
+    <Link href={item.href} className={className} onClick={onNavigate}>
+      {content}
+    </Link>
+  );
+}
+
+type MegaMenuDropdownProps = {
   label: string;
-  items: MenuItem[];
-  locale: Locale;
+  items: RichMenuItem[];
+  columns?: 1 | 2;
 };
 
-function NavDropdown({ label, items, locale }: NavDropdownProps) {
+function MegaMenuDropdown({ label, items, columns = 1 }: MegaMenuDropdownProps) {
   const [open, setOpen] = useState(false);
   const ref = useRef<HTMLDivElement>(null);
 
@@ -31,6 +84,8 @@ function NavDropdown({ label, items, locale }: NavDropdownProps) {
     document.addEventListener("mousedown", handleClickOutside);
     return () => document.removeEventListener("mousedown", handleClickOutside);
   }, []);
+
+  const close = () => setOpen(false);
 
   return (
     <div className="relative" ref={ref}>
@@ -50,31 +105,18 @@ function NavDropdown({ label, items, locale }: NavDropdownProps) {
           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
         </svg>
       </button>
+
       {open && (
-        <div className="absolute left-0 top-full z-50 mt-2 min-w-[220px] rounded-xl border border-white/10 bg-[#14121c] p-2 shadow-xl">
-          {items.map((item) =>
-            item.external ? (
-              <a
-                key={item.href}
-                href={item.href}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="block rounded-lg px-3 py-2 text-sm text-zinc-300 transition hover:bg-white/5 hover:text-white"
-                onClick={() => setOpen(false)}
-              >
-                {item.label}
-              </a>
-            ) : (
-              <Link
-                key={item.href}
-                href={`/${locale}${item.href}`}
-                className="block rounded-lg px-3 py-2 text-sm text-zinc-300 transition hover:bg-white/5 hover:text-white"
-                onClick={() => setOpen(false)}
-              >
-                {item.label}
-              </Link>
-            )
-          )}
+        <div
+          className={`absolute left-0 top-full z-50 mt-3 rounded-2xl border border-white/10 bg-[#16141f] p-3 shadow-2xl shadow-black/40 ${
+            columns === 2 ? "w-[640px] max-w-[calc(100vw-2rem)]" : "w-[340px] max-w-[calc(100vw-2rem)]"
+          }`}
+        >
+          <div className={columns === 2 ? "grid grid-cols-1 gap-1 sm:grid-cols-2" : "flex flex-col gap-1"}>
+            {items.map((item) => (
+              <MegaMenuItem key={item.title} item={item} onNavigate={close} />
+            ))}
+          </div>
         </div>
       )}
     </div>
@@ -88,20 +130,27 @@ type NavbarProps = {
   githubUrl: string;
 };
 
+function buildMenuItems(
+  entries: Dictionary["featuresMenu"] | Dictionary["resourcesMenu"],
+  locale: Locale,
+  githubUrl: string
+): RichMenuItem[] {
+  return Object.values(entries).map((entry) => {
+    const resolved = resolveHref(entry.href, locale, githubUrl);
+    return {
+      title: entry.title,
+      description: entry.description,
+      href: resolved.url,
+      icon: entry.icon,
+      external: resolved.external,
+    };
+  });
+}
+
 export function Navbar({ locale, dict, inviteUrl, githubUrl }: NavbarProps) {
   const otherLocale = locale === "tr" ? "en" : "tr";
-
-  const featureItems: MenuItem[] = Object.values(dict.featuresMenu).map((item) => ({
-    label: item.label,
-    href: item.href,
-  }));
-
-  const resourceItems: MenuItem[] = [
-    { label: dict.resourcesMenu.commandsModeration.label, href: dict.resourcesMenu.commandsModeration.href },
-    { label: dict.resourcesMenu.commandsGeneral.label, href: dict.resourcesMenu.commandsGeneral.href },
-    { label: dict.resourcesMenu.commandsVoice.label, href: dict.resourcesMenu.commandsVoice.href },
-    { label: dict.resourcesMenu.github.label, href: githubUrl, external: true },
-  ];
+  const featureItems = buildMenuItems(dict.featuresMenu, locale, githubUrl);
+  const resourceItems = buildMenuItems(dict.resourcesMenu, locale, githubUrl);
 
   return (
     <header className="sticky top-0 z-40 border-b border-white/10 bg-[#0c0a12]/80 backdrop-blur-xl">
@@ -119,8 +168,8 @@ export function Navbar({ locale, dict, inviteUrl, githubUrl }: NavbarProps) {
         </Link>
 
         <div className="hidden items-center gap-1 md:flex">
-          <NavDropdown label={dict.nav.features} items={featureItems} locale={locale} />
-          <NavDropdown label={dict.nav.resources} items={resourceItems} locale={locale} />
+          <MegaMenuDropdown label={dict.nav.features} items={featureItems} columns={2} />
+          <MegaMenuDropdown label={dict.nav.resources} items={resourceItems} columns={1} />
         </div>
 
         <div className="flex items-center gap-2">

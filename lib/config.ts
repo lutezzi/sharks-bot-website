@@ -7,7 +7,7 @@ export const siteConfig = {
   name: "sharks",
   domain: "sharksbot.xyz",
   author: "lutezzi",
-  githubUrl: "https://github.com/lutezzi/sharks-bot",
+  githubUrl: "https://github.com/lutezzi/",
 };
 
 export function getDiscordInviteUrl(clientId: string) {

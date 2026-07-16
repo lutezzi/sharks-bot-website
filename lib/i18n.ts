@@ -1,4 +1,23 @@
 import type { Locale } from "@/lib/config";
+import type { MenuIconName } from "@/components/NavIcons";
+
+export type FeatureMockupType =
+  | "embed"
+  | "welcome"
+  | "roles"
+  | "moderation"
+  | "setup"
+  | "voice";
+
+export type FeatureSection = {
+  icon: MenuIconName;
+  label: string;
+  title: string;
+  description: string;
+  cta: string;
+  ctaSlug: string;
+  mockup: FeatureMockupType;
+};
 
 export type Dictionary = typeof tr;
 
@@ -75,47 +94,75 @@ export const tr = {
   },
   hero: {
     badge: "Discord Botu",
-    title: "Sunucunu sharks ile yönet",
+    title: "Profesyonel bir Discord Sunucusu Oluşturun!",
     subtitle:
-      "Hoş geldin mesajları, rol seçim menüleri, moderasyon araçları ve kullanışlı slash komutları — hepsi tek botta.",
+      "Hoş geldin mesajları, rol menüleri, moderasyon araçları, gömülü mesajlar ve kullanışlı slash komutları — hepsi tek botta.",
     addBot: "Discord'a Ekle",
-    browseFeatures: "Özelliklere Göz At",
+    browseFeatures: "Özelliklere Göz Atın",
   },
   features: {
-    title: "Özellikler",
-    subtitle: "Sunucunu büyütürken topluluğunu düzenli tut.",
-    items: [
+    sections: [
       {
-        icon: "👋",
-        title: "Hoş Geldin & Ayrılma",
-        description: "Yeni üyeleri karşıla, ayrılanları özel kanallarda bildir.",
+        icon: "embed",
+        label: "GÖMÜLÜ MESAJLAR",
+        title: "Sunucunuz için kolayca gömülü mesajlar oluşturun!",
+        description:
+          "sharks'ın basit özelleştirmesini kullanarak kurallar, duyurular ve bilgi mesajlarını tercih ettiğiniz kanala gönderin.",
+        cta: "Gömülü mesajlar hakkında daha fazla bilgi edinin",
+        ctaSlug: "commands",
+        mockup: "embed",
       },
       {
-        icon: "🎨",
-        title: "Rol Menüleri",
-        description: "Renk, cinsiyet ve ilgi alanı rolleri için dropdown menüler.",
+        icon: "welcome",
+        label: "KARŞILAMA MESAJLARI",
+        title: "Yeni üyeleri tarzla karşılayın",
+        description:
+          "Kullanıcı adını ve avatarını içeren hoş geldin embed'leri oluşturun. Ayrılan üyeler için otomatik bildirimler gönderin.",
+        cta: "Karşılama hakkında daha fazla bilgi edinin",
+        ctaSlug: "welcome",
+        mockup: "welcome",
       },
       {
-        icon: "🔨",
-        title: "Moderasyon",
-        description: "Ban, kick, mute, unban, unmute ve toplu mesaj silme.",
+        icon: "roles",
+        label: "ROL MENÜLERİ",
+        title: "Üyeleriniz kendi rollerini seçsin",
+        description:
+          "Renk, cinsiyet ve ilgi alanı rolleri için dropdown menüler oluşturun. Tek tıkla rol verme ve alma.",
+        cta: "Rol menüleri hakkında daha fazla bilgi edinin",
+        ctaSlug: "role-menus",
+        mockup: "roles",
       },
       {
-        icon: "📜",
-        title: "Kurallar & Bilgi",
-        description: "Kurallar embed'i, userinfo, serverinfo ve avatar komutları.",
+        icon: "moderation",
+        label: "MODERASYON",
+        title: "Sunucunuzu güvende tutun",
+        description:
+          "Ban, kick, mute, unban, unmute ve toplu mesaj silme araçlarıyla moderasyon ekibinize güç katın.",
+        cta: "Moderasyon hakkında daha fazla bilgi edinin",
+        ctaSlug: "moderation",
+        mockup: "moderation",
       },
       {
-        icon: "⚙️",
-        title: "Kolay Kurulum",
-        description: "/setup ile hoş geldin ve ayrılma kanallarını saniyeler içinde ayarla.",
+        icon: "setup",
+        label: "KOLAY KURULUM",
+        title: "Saniyeler içinde kurulum yapın",
+        description:
+          "/setup komutu ile hoş geldin ve ayrılma kanallarını, log kanallarını ve diğer ayarları hızlıca yapılandırın.",
+        cta: "Kurulum hakkında daha fazla bilgi edinin",
+        ctaSlug: "setup",
+        mockup: "setup",
       },
       {
-        icon: "🎧",
-        title: "Ses Kanalı",
-        description: "/join ve /leave ile botu sesli kanala davet et veya çıkar.",
+        icon: "voice",
+        label: "SES KANALI",
+        title: "Botu sesli kanala davet edin",
+        description:
+          "/join ve /leave komutlarıyla sharks'ı ses kanalına bağlayın veya çıkarın.",
+        cta: "Komutlar hakkında daha fazla bilgi edinin",
+        ctaSlug: "commands",
+        mockup: "voice",
       },
-    ],
+    ] satisfies FeatureSection[],
   },
   commandsPage: {
     title: "Komutlar",
@@ -212,47 +259,75 @@ export const en: Dictionary = {
   },
   hero: {
     badge: "Discord Bot",
-    title: "Manage your server with sharks",
+    title: "Build a Professional Discord Server!",
     subtitle:
-      "Welcome messages, role selection menus, moderation tools, and useful slash commands — all in one bot.",
+      "Welcome messages, role menus, moderation tools, embedded messages, and useful slash commands — all in one bot.",
     addBot: "Add to Discord",
     browseFeatures: "Browse Features",
   },
   features: {
-    title: "Features",
-    subtitle: "Keep your community organized as your server grows.",
-    items: [
+    sections: [
       {
-        icon: "👋",
-        title: "Welcome & Leave",
-        description: "Greet new members and announce departures in dedicated channels.",
+        icon: "embed",
+        label: "EMBEDDED MESSAGES",
+        title: "Easily create embedded messages for your server!",
+        description:
+          "Use sharks' simple customization to send rules, announcements, and info messages to any channel you choose.",
+        cta: "Learn more about embedded messages",
+        ctaSlug: "commands",
+        mockup: "embed",
       },
       {
-        icon: "🎨",
-        title: "Role Menus",
-        description: "Dropdown menus for color, gender, and interest-based roles.",
+        icon: "welcome",
+        label: "WELCOME MESSAGES",
+        title: "Welcome new members in style",
+        description:
+          "Create welcome embeds with usernames and avatars. Send automatic notifications when members leave.",
+        cta: "Learn more about welcome messages",
+        ctaSlug: "welcome",
+        mockup: "welcome",
       },
       {
-        icon: "🔨",
-        title: "Moderation",
-        description: "Ban, kick, mute, unban, unmute, and bulk message deletion.",
+        icon: "roles",
+        label: "ROLE MENUS",
+        title: "Let members pick their own roles",
+        description:
+          "Create dropdown menus for color, gender, and interest roles. One-click role assignment and removal.",
+        cta: "Learn more about role menus",
+        ctaSlug: "role-menus",
+        mockup: "roles",
       },
       {
-        icon: "📜",
-        title: "Rules & Info",
-        description: "Rules embed, userinfo, serverinfo, and avatar commands.",
+        icon: "moderation",
+        label: "MODERATION",
+        title: "Keep your server safe",
+        description:
+          "Empower your moderation team with ban, kick, mute, unban, unmute, and bulk message deletion tools.",
+        cta: "Learn more about moderation",
+        ctaSlug: "moderation",
+        mockup: "moderation",
       },
       {
-        icon: "⚙️",
-        title: "Easy Setup",
-        description: "Configure welcome and leave channels in seconds with /setup.",
+        icon: "setup",
+        label: "EASY SETUP",
+        title: "Get set up in seconds",
+        description:
+          "Configure welcome and leave channels, log channels, and other settings quickly with /setup.",
+        cta: "Learn more about setup",
+        ctaSlug: "setup",
+        mockup: "setup",
       },
       {
-        icon: "🎧",
-        title: "Voice Channel",
-        description: "Invite or disconnect the bot from voice with /join and /leave.",
+        icon: "voice",
+        label: "VOICE CHANNEL",
+        title: "Invite the bot to voice",
+        description:
+          "Connect or disconnect sharks from a voice channel with /join and /leave.",
+        cta: "Learn more about commands",
+        ctaSlug: "commands",
+        mockup: "voice",
       },
-    ],
+    ] satisfies FeatureSection[],
   },
   commandsPage: {
     title: "Commands",

@@ -20,7 +20,7 @@ export default async function HomePage({ params }: PageProps) {
   return (
     <>
       <Hero dict={dict} inviteUrl={inviteUrl} />
-      <FeaturesSection dict={dict} />
+      <FeaturesSection dict={dict} locale={locale} />
     </>
   );
 }

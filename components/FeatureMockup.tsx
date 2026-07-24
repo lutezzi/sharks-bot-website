@@ -186,15 +186,15 @@ function SetupMockup() {
   return (
     <MockupShell sparkleClassName="text-blue-400">
       <div className="rounded-xl bg-[#1e1f22] p-4 font-mono text-sm">
-        <div className="text-zinc-500"># Hoş geldin kanalını ayarla</div>
+        <div className="text-zinc-500"># Renk rolü ekle</div>
+        <div className="mt-2 text-[#c9b6e4]">/setup color-menu add</div>
+        <div className="mt-1 text-zinc-400">role: @matcha · hex: #A8C69F</div>
+        <div className="mt-4 rounded-lg border border-emerald-500/30 bg-emerald-500/10 px-3 py-2 text-emerald-400">
+          ✓ Renk rolü eklendi!
+        </div>
+        <div className="mt-3 text-zinc-500"># Hoş geldin kanalı</div>
         <div className="mt-2 text-[#c9b6e4]">/setup welcome-channel</div>
         <div className="mt-1 text-zinc-400">channel: #hosgeldin</div>
-        <div className="mt-4 rounded-lg border border-emerald-500/30 bg-emerald-500/10 px-3 py-2 text-emerald-400">
-          ✓ Hoş geldin kanalı ayarlandı!
-        </div>
-        <div className="mt-3 text-zinc-500"># Ayrılma kanalını ayarla</div>
-        <div className="mt-2 text-[#c9b6e4]">/setup leave-channel</div>
-        <div className="mt-1 text-zinc-400">channel: #ayrilanlar</div>
       </div>
     </MockupShell>
   );
@@ -205,8 +205,8 @@ function VoiceMockup() {
     <MockupShell sparkleClassName="text-violet-400">
       <div className="flex flex-col items-center py-4">
         <BotAvatar size={80} />
-        <p className="mt-4 text-sm font-semibold text-white">Genel Ses</p>
-        <p className="mt-1 text-xs text-zinc-400">sharks bağlandı</p>
+        <p className="mt-4 text-sm font-semibold text-white">Lofi Lounge</p>
+        <p className="mt-1 text-xs text-zinc-400">/lofi · soft-lofi çalıyor</p>
         <div className="mt-6 flex gap-2">
           {[1, 2, 3, 4, 5].map((bar) => (
             <div
@@ -228,6 +228,7 @@ const mockupMap = {
   moderation: ModerationMockup,
   setup: SetupMockup,
   voice: VoiceMockup,
+  music: VoiceMockup,
 };
 
 export function FeatureMockup({ type }: FeatureMockupProps) {

@@ -27,7 +27,13 @@ export const commandGroups: CommandGroup[] = [
     commands: [
       { name: "rules", description: { tr: "Sunucu kurallarını gösterir.", en: "Show the server rules." } },
       { name: "help", description: { tr: "Tüm komutları listeler.", en: "List all commands by category." } },
-      { name: "setup", description: { tr: "Hoş geldin/ayrılma kanallarını ayarlar.", en: "Configure welcome and leave channels." } },
+      {
+        name: "setup",
+        description: {
+          tr: "Hoş geldin kanalları, rol menüleri ve kuralları yapılandırır.",
+          en: "Configure welcome channels, role menus, and rules.",
+        },
+      },
       { name: "color-menu", description: { tr: "Renk seçim menüsünü gönderir.", en: "Send the color selection menu." } },
       { name: "gender-menu", description: { tr: "Cinsiyet seçim menüsünü gönderir.", en: "Send the gender selection menu." } },
       { name: "role-menu", description: { tr: "Rol seçim menüsünü gönderir.", en: "Send the role selection menu." } },
@@ -39,6 +45,14 @@ export const commandGroups: CommandGroup[] = [
   {
     id: "voice",
     commands: [
+      { name: "lofi", description: { tr: "Ses kanalında soft-lofi müzik çalar.", en: "Play soft lofi music in your voice channel." } },
+      {
+        name: "music",
+        description: {
+          tr: "Müziği durdurur, ses seviyesini ayarlar.",
+          en: "Stop music and control playback volume.",
+        },
+      },
       { name: "join", description: { tr: "Botu sesli kanala davet eder.", en: "Invite the bot to your voice channel." } },
       { name: "leave", description: { tr: "Botu sesli kanaldan çıkarır.", en: "Disconnect the bot from voice." } },
     ],

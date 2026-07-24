@@ -35,12 +35,13 @@ export const docNavGroups: DocNavGroup[] = [
       { slug: "moderation", title: { tr: "Moderasyon", en: "Moderation" } },
       { slug: "role-menus", title: { tr: "Rol Menüleri", en: "Role Menus" } },
       { slug: "welcome", title: { tr: "Hoş Geldin Mesajları", en: "Welcome Messages" } },
+      { slug: "music", title: { tr: "Soft-Lofi Müzik", en: "Soft-Lofi Music" } },
     ],
   },
   {
     title: { tr: "Yapılandırma", en: "Configuration" },
     items: [
-      { slug: "configuration", title: { tr: "Config Dosyaları", en: "Config Files" } },
+      { slug: "configuration", title: { tr: "Sunucu Ayarları", en: "Server Settings" } },
     ],
   },
 ];
@@ -57,16 +58,17 @@ export const docPages: DocPage[] = [
       tr: [
         {
           paragraphs: [
-            "sharks, Discord sunucuları için hoş geldin mesajları, rol menüleri, moderasyon araçları ve slash komutları sunan bir moderasyon botudur.",
-            "Bu dokümantasyon botu sunucunuza eklemenizden komutları kullanmaya kadar tüm adımları kapsar.",
+            "sharks, Discord sunucuları için hoş geldin mesajları, rol menüleri, moderasyon, soft-lofi müzik ve slash komutları sunan bir topluluk botudur.",
+            "Botu davet ettikten sonra tüm ayarları Discord içinden `/setup` komutu ile yapabilirsiniz — dosya düzenlemenize gerek yok.",
           ],
         },
         {
           heading: "Neler yapabilirsiniz?",
           list: [
             "Yeni üyeler için hoş geldin ve ayrılma mesajları göndermek",
-            "Renk, cinsiyet ve ilgi alanı rolleri için dropdown menüler oluşturmak",
+            "Renk, cinsiyet ve ilgi alanı rolleri için dropdown/buton menüler oluşturmak",
             "Ban, kick, mute ve mesaj temizleme ile moderasyon yapmak",
+            "Ses kanalında `/lofi` ile soft-lofi müzik dinlemek",
             "Kurallar, userinfo, serverinfo gibi bilgi komutlarını kullanmak",
           ],
         },
@@ -82,16 +84,17 @@ export const docPages: DocPage[] = [
       en: [
         {
           paragraphs: [
-            "sharks is a moderation bot for Discord servers offering welcome messages, role menus, moderation tools, and slash commands.",
-            "This documentation covers everything from adding the bot to your server to using its commands.",
+            "sharks is a community bot for Discord servers offering welcome messages, role menus, moderation, soft-lofi music, and slash commands.",
+            "After inviting the bot, configure everything from Discord with `/setup` — no file editing required.",
           ],
         },
         {
           heading: "What can you do?",
           list: [
             "Send welcome and leave messages for new members",
-            "Create dropdown menus for color, gender, and interest roles",
+            "Create dropdown/button menus for color, gender, and interest roles",
             "Moderate with ban, kick, mute, and message clearing",
+            "Listen to soft lofi in voice with `/lofi`",
             "Use info commands like rules, userinfo, and serverinfo",
           ],
         },
@@ -133,9 +136,16 @@ export const docPages: DocPage[] = [
           code: "/setup welcome-channel channel:#hosgeldin",
         },
         {
-          heading: "4. Kuralları gönderin",
+          heading: "4. Rol menülerini yapılandırın",
           paragraphs: [
-            "Kurallar kanalında `/rules` komutunu kullanarak sunucu kurallarını embed olarak paylaşabilirsiniz. Kurallar metnini `src/config/rules.js` dosyasından özelleştirebilirsiniz.",
+            "Discord'da renk/cinsiyet/ilgi alanı rollerini oluşturduktan sonra `/setup` ile menülere ekleyin. Örnek:",
+          ],
+          code: "/setup color-menu add role:@matcha label:matcha hex:#A8C69F",
+        },
+        {
+          heading: "5. Kuralları ayarlayın ve paylaşın",
+          paragraphs: [
+            "`/setup rules add` ile kurallarınızı ekleyin, ardından kurallar kanalında `/rules` komutunu çalıştırın.",
           ],
         },
       ],
@@ -158,9 +168,16 @@ export const docPages: DocPage[] = [
           code: "/setup welcome-channel channel:#welcome",
         },
         {
-          heading: "4. Post the rules",
+          heading: "4. Configure role menus",
           paragraphs: [
-            "Use `/rules` in your rules channel to share server rules as an embed. Customize the rules text in `src/config/rules.js`.",
+            "After creating roles in Discord, add them with `/setup`. Example:",
+          ],
+          code: "/setup color-menu add role:@matcha label:matcha hex:#A8C69F",
+        },
+        {
+          heading: "5. Set rules and post them",
+          paragraphs: [
+            "Add rules with `/setup rules add`, then run `/rules` in your rules channel.",
           ],
         },
       ],
@@ -170,8 +187,8 @@ export const docPages: DocPage[] = [
     slug: "setup",
     title: { tr: "Bot Kurulumu", en: "Bot Setup" },
     description: {
-      tr: "Hoş geldin, ayrılma kanalları ve temel bot ayarları.",
-      en: "Welcome, leave channels, and basic bot settings.",
+      tr: "Hoş geldin, ayrılma kanalları, rol menüleri, kurallar ve diğer sunucu ayarları.",
+      en: "Welcome/leave channels, role menus, rules, and other server settings.",
     },
     content: {
       tr: [
@@ -179,8 +196,12 @@ export const docPages: DocPage[] = [
           heading: "/setup komutu",
           paragraphs: ["Yetkili kullanıcılar sunucu ayarlarını `/setup` komutu ile yapılandırabilir:"],
           list: [
-            "/setup welcome-channel — Hoş geldin mesajlarının gönderileceği kanal",
-            "/setup leave-channel — Ayrılma mesajlarının gönderileceği kanal",
+            "/setup welcome-channel — Hoş geldin mesaj kanalı",
+            "/setup leave-channel — Ayrılma mesaj kanalı",
+            "/setup color-menu add|remove|list — Renk menüsü rolleri",
+            "/setup gender-menu add|remove|list — Cinsiyet menüsü rolleri",
+            "/setup role-menu add|remove|list — Buton menüsü rolleri",
+            "/setup rules set-title|set-description|add|remove|list|reset — Sunucu kuralları",
           ],
         },
         {
@@ -190,7 +211,7 @@ export const docPages: DocPage[] = [
             "Mesajları Yönet — /clear komutu için",
             "Üyeleri Yasakla / At / Sustur — moderasyon komutları için",
             "Rolleri Yönet — rol menüleri için",
-            "Bağlan — /join ses komutu için",
+            "Bağlan / Konuş — /lofi müzik komutu için",
           ],
         },
       ],
@@ -199,8 +220,12 @@ export const docPages: DocPage[] = [
           heading: "/setup command",
           paragraphs: ["Staff can configure server settings with the `/setup` command:"],
           list: [
-            "/setup welcome-channel — Channel for welcome messages",
-            "/setup leave-channel — Channel for leave messages",
+            "/setup welcome-channel — Welcome message channel",
+            "/setup leave-channel — Leave message channel",
+            "/setup color-menu add|remove|list — Color menu roles",
+            "/setup gender-menu add|remove|list — Gender menu roles",
+            "/setup role-menu add|remove|list — Button menu roles",
+            "/setup rules set-title|set-description|add|remove|list|reset — Server rules",
           ],
         },
         {
@@ -210,7 +235,7 @@ export const docPages: DocPage[] = [
             "Manage Messages — for /clear command",
             "Ban / Kick / Moderate Members — for moderation commands",
             "Manage Roles — for role menus",
-            "Connect — for /join voice command",
+            "Connect / Speak — for /lofi music",
           ],
         },
       ],
@@ -226,7 +251,7 @@ export const docPages: DocPage[] = [
     content: {
       tr: [
         {
-          paragraphs: ["sharks 17 slash komutu sunar. Komutlar üç kategoriye ayrılır:"],
+          paragraphs: ["sharks 20 slash komutu sunar. Komutlar üç kategoriye ayrılır:"],
         },
         {
           heading: "Moderasyon",
@@ -248,7 +273,7 @@ export const docPages: DocPage[] = [
         },
         {
           heading: "Ses",
-          list: ["/join", "/leave"],
+          list: ["/lofi", "/music stop", "/music volume", "/music now-playing", "/join", "/leave"],
         },
         {
           paragraphs: ["Detaylı komut listesi için ana sitedeki Komutlar sayfasına bakabilirsiniz."],
@@ -256,7 +281,7 @@ export const docPages: DocPage[] = [
       ],
       en: [
         {
-          paragraphs: ["sharks offers 17 slash commands divided into three categories:"],
+          paragraphs: ["sharks offers 20 slash commands divided into three categories:"],
         },
         {
           heading: "Moderation",
@@ -278,7 +303,7 @@ export const docPages: DocPage[] = [
         },
         {
           heading: "Voice",
-          list: ["/join", "/leave"],
+          list: ["/lofi", "/music stop", "/music volume", "/music now-playing", "/join", "/leave"],
         },
         {
           paragraphs: ["See the Commands page on the main site for the full command reference."],
@@ -359,22 +384,23 @@ export const docPages: DocPage[] = [
       tr: [
         {
           paragraphs: [
-            "sharks üç tür rol menüsü sunar. Her biri için önce Discord'da rolleri oluşturup config dosyalarına rol ID'lerini yazmanız gerekir.",
+            "sharks üç tür rol menüsü sunar. Önce Discord'da rolleri oluşturun, ardından `/setup` ile menülere ekleyin ve ilgili kanalda menü komutunu çalıştırın.",
           ],
         },
         {
           heading: "Renk menüsü",
           paragraphs: [
             "1. Sunucuda renk rolleri oluşturun",
-            "2. `src/config/colorRoles.js` dosyasına rol ID ve hex renk kodlarını girin",
+            "2. `/setup color-menu add role:@rol label:etiket hex:#RRGGBB` ile ekleyin",
             "3. `/color-menu` komutunu menüyü göndermek istediğiniz kanalda çalıştırın",
           ],
+          code: "/setup color-menu add role:@matcha label:matcha hex:#A8C69F emoji:🍈",
         },
         {
           heading: "Cinsiyet menüsü",
           paragraphs: [
             "1. Cinsiyet rolleri oluşturun",
-            "2. `src/config/genderRoles.js` dosyasını düzenleyin",
+            "2. `/setup gender-menu add` ile ekleyin",
             "3. `/gender-menu` komutunu çalıştırın",
           ],
         },
@@ -382,7 +408,7 @@ export const docPages: DocPage[] = [
           heading: "Rol menüsü (buton)",
           paragraphs: [
             "1. Bildirim/ilgi alanı rolleri oluşturun",
-            "2. `src/config/reactionRoles.js` dosyasını düzenleyin",
+            "2. `/setup role-menu add` ile ekleyin (isteğe bağlı style: Primary/Secondary/Success/Danger)",
             "3. `/role-menu` komutunu çalıştırın — kullanıcılar birden fazla rol seçebilir",
           ],
         },
@@ -390,22 +416,23 @@ export const docPages: DocPage[] = [
       en: [
         {
           paragraphs: [
-            "sharks offers three types of role menus. For each, create roles in Discord first and add role IDs to the config files.",
+            "sharks offers three types of role menus. Create roles in Discord, add them with `/setup`, then post the menu in a channel.",
           ],
         },
         {
           heading: "Color menu",
           paragraphs: [
             "1. Create color roles in your server",
-            "2. Add role IDs and hex colors to `src/config/colorRoles.js`",
+            "2. Add with `/setup color-menu add role:@role label:label hex:#RRGGBB`",
             "3. Run `/color-menu` in the channel where you want the menu",
           ],
+          code: "/setup color-menu add role:@matcha label:matcha hex:#A8C69F emoji:🍈",
         },
         {
           heading: "Gender menu",
           paragraphs: [
             "1. Create gender roles",
-            "2. Edit `src/config/genderRoles.js`",
+            "2. Add with `/setup gender-menu add`",
             "3. Run `/gender-menu`",
           ],
         },
@@ -413,7 +440,7 @@ export const docPages: DocPage[] = [
           heading: "Role menu (buttons)",
           paragraphs: [
             "1. Create notification/interest roles",
-            "2. Edit `src/config/reactionRoles.js`",
+            "2. Add with `/setup role-menu add` (optional style: Primary/Secondary/Success/Danger)",
             "3. Run `/role-menu` — users can select multiple roles",
           ],
         },
@@ -444,7 +471,7 @@ export const docPages: DocPage[] = [
         {
           heading: "Metinleri özelleştirme",
           paragraphs: [
-            "Hoş geldin ve ayrılma mesaj metinleri `src/locales/en.json` (veya `tr.json`) dosyasındaki `embeds.welcome` ve `embeds.leave` bölümlerinden düzenlenir.",
+            "Hoş geldin ve ayrılma mesaj metinleri bot geliştiricisi tarafından yönetilir. Sunucu kuralları ise `/setup rules` komutları ile sunucunuza özel ayarlanır.",
           ],
         },
       ],
@@ -464,7 +491,7 @@ export const docPages: DocPage[] = [
         {
           heading: "Customizing text",
           paragraphs: [
-            "Welcome and leave message text is edited in `src/locales/en.json` (or `tr.json`) under `embeds.welcome` and `embeds.leave`.",
+            "Welcome and leave message text is managed by the bot developer. Server rules are configured per server with `/setup rules` commands.",
           ],
         },
       ],
@@ -472,44 +499,128 @@ export const docPages: DocPage[] = [
   },
   {
     slug: "configuration",
-    title: { tr: "Config Dosyaları", en: "Config Files" },
+    title: { tr: "Sunucu Ayarları", en: "Server Settings" },
     description: {
-      tr: "Bot yapılandırma dosyalarının açıklaması.",
-      en: "Overview of bot configuration files.",
+      tr: "Ayarların nerede saklandığı ve nasıl yönetildiği.",
+      en: "Where settings are stored and how they are managed.",
     },
     content: {
       tr: [
         {
-          paragraphs: ["Self-host ediyorsanız aşağıdaki dosyaları düzenleyebilirsiniz:"],
+          paragraphs: [
+            "sharks bir topluluk botudur — sunucu adminleri ayarları Discord içinden `/setup` komutu ile yapar. Dosya düzenlemenize gerek yoktur.",
+          ],
         },
         {
-          heading: "Dosyalar",
+          heading: "Neler /setup ile yapılandırılır?",
           list: [
-            "src/config/rules.js — Sunucu kuralları",
-            "src/config/colorRoles.js — Renk rolleri ve hex kodları",
-            "src/config/genderRoles.js — Cinsiyet rolleri",
-            "src/config/reactionRoles.js — İlgi alanı/bildirim rolleri",
-            "src/config/activities.js — Bot durum çubuğu yazıları",
-            "src/locales/*.json — Tüm bot metinleri (i18n)",
-            ".env — Token, CLIENT_ID ve LOCALE ayarları",
+            "Hoş geldin ve ayrılma kanalları",
+            "Renk, cinsiyet ve buton menüsü rolleri",
+            "Sunucu kuralları (/rules embed'i)",
+          ],
+        },
+        {
+          heading: "Veri saklama",
+          paragraphs: [
+            "Sunucu bazlı ayarlar bot sunucusunda `data/settings.json` dosyasında saklanır. Her sunucunun ayarları birbirinden bağımsızdır.",
+          ],
+        },
+        {
+          heading: "Müzik",
+          paragraphs: [
+            "Soft-lofi yayın kaynakları bot geliştiricisi tarafından yönetilir; sunucu adminlerinin ayrıca yapılandırması gerekmez.",
           ],
         },
       ],
       en: [
         {
-          paragraphs: ["If self-hosting, you can edit the following files:"],
+          paragraphs: [
+            "sharks is a community bot — server admins configure everything from Discord with `/setup`. No file editing required.",
+          ],
         },
         {
-          heading: "Files",
+          heading: "What can you configure with /setup?",
           list: [
-            "src/config/rules.js — Server rules",
-            "src/config/colorRoles.js — Color roles and hex codes",
-            "src/config/genderRoles.js — Gender roles",
-            "src/config/reactionRoles.js — Interest/notification roles",
-            "src/config/activities.js — Bot status rotation text",
-            "src/locales/*.json — All bot strings (i18n)",
-            ".env — Token, CLIENT_ID, and LOCALE settings",
+            "Welcome and leave channels",
+            "Color, gender, and button menu roles",
+            "Server rules (shown by /rules)",
           ],
+        },
+        {
+          heading: "Data storage",
+          paragraphs: [
+            "Per-server settings are stored in `data/settings.json` on the bot host. Each guild's settings are independent.",
+          ],
+        },
+        {
+          heading: "Music",
+          paragraphs: [
+            "Soft-lofi stream sources are managed by the bot developer; server admins do not need separate music configuration.",
+          ],
+        },
+      ],
+    },
+  },
+  {
+    slug: "music",
+    title: { tr: "Soft-Lofi Müzik", en: "Soft-Lofi Music" },
+    description: {
+      tr: "Ses kanalında soft-lofi dinleme.",
+      en: "Listening to soft lofi in voice channels.",
+    },
+    content: {
+      tr: [
+        {
+          paragraphs: [
+            "sharks, ses kanallarında soft-lofi temalı müzik çalmanızı sağlar. Study/chill odaları için idealdir.",
+          ],
+        },
+        {
+          heading: "/lofi",
+          paragraphs: [
+            "Bir ses kanalına katılın ve `/lofi` yazın. Bot kanala bağlanır ve soft-lofi yayını başlatır. Akış kesilirse bot otomatik olarak yeniden dener.",
+          ],
+          code: "/lofi",
+        },
+        {
+          heading: "/music komutları",
+          list: [
+            "/music stop — Müziği durdurur ve ses kanalından ayrılır",
+            "/music volume level:50 — Ses seviyesini ayarlar (1–100)",
+            "/music now-playing — Çalıp çalmadığını kontrol eder",
+            "/leave — Müziği durdurup kanaldan ayrılır (alternatif)",
+          ],
+        },
+        {
+          heading: "Gerekli izinler",
+          list: ["Bağlan", "Konuş (Speak)"],
+        },
+      ],
+      en: [
+        {
+          paragraphs: [
+            "sharks lets you play soft-lofi themed music in voice channels — great for study and chill rooms.",
+          ],
+        },
+        {
+          heading: "/lofi",
+          paragraphs: [
+            "Join a voice channel and run `/lofi`. The bot connects and starts a soft-lofi stream. If a stream drops, the bot retries automatically.",
+          ],
+          code: "/lofi",
+        },
+        {
+          heading: "/music commands",
+          list: [
+            "/music stop — Stop playback and disconnect from voice",
+            "/music volume level:50 — Set volume (1–100)",
+            "/music now-playing — Check if music is playing",
+            "/leave — Stop and disconnect (alternative)",
+          ],
+        },
+        {
+          heading: "Required permissions",
+          list: ["Connect", "Speak"],
         },
       ],
     },

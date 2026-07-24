@@ -7,7 +7,8 @@ export type FeatureMockupType =
   | "roles"
   | "moderation"
   | "setup"
-  | "voice";
+  | "voice"
+  | "music";
 
 export type FeatureSection = {
   icon: MenuIconName;
@@ -23,8 +24,8 @@ export type Dictionary = typeof tr;
 
 export const tr = {
   meta: {
-    title: "sharks — Discord Moderasyon Botu",
-    description: "Hoş geldin mesajları, rol menüleri, moderasyon ve daha fazlası.",
+    title: "sharks — Discord Topluluk Botu",
+    description: "Hoş geldin mesajları, rol menüleri, moderasyon, soft-lofi müzik ve daha fazlası.",
   },
   nav: {
     features: "Özellikler",
@@ -61,14 +62,14 @@ export const tr = {
     },
     setup: {
       title: "Kolay Kurulum",
-      description: "/setup ile hoş geldin kanallarını saniyeler içinde ayarlayın.",
+      description: "/setup ile kanalları, rol menülerini ve kuralları Discord'dan ayarlayın.",
       href: "#setup",
       icon: "setup" as const,
     },
     voice: {
-      title: "Ses Kanalı",
-      description: "/join ve /leave ile botu sesli kanala davet edin.",
-      href: "#voice",
+      title: "Soft-Lofi Müzik",
+      description: "/lofi ile ses kanalında 7/24 soft-lofi dinleyin.",
+      href: "#music",
       icon: "voice" as const,
     },
   },
@@ -96,7 +97,7 @@ export const tr = {
     badge: "Discord Botu",
     title: "Profesyonel bir Discord Sunucusu Oluşturun!",
     subtitle:
-      "Hoş geldin mesajları, rol menüleri, moderasyon araçları, gömülü mesajlar ve kullanışlı slash komutları — hepsi tek botta.",
+      "Hoş geldin mesajları, rol menüleri, moderasyon, soft-lofi müzik ve kullanışlı slash komutları — hepsi tek botta.",
     addBot: "Discord'a Ekle",
     browseFeatures: "Özelliklere Göz Atın",
   },
@@ -145,22 +146,22 @@ export const tr = {
       {
         icon: "setup",
         label: "KOLAY KURULUM",
-        title: "Saniyeler içinde kurulum yapın",
+        title: "Dosya düzenlemeden kurulum",
         description:
-          "/setup komutu ile hoş geldin ve ayrılma kanallarını, log kanallarını ve diğer ayarları hızlıca yapılandırın.",
+          "/setup komutu ile hoş geldin kanallarını, renk/cinsiyet/rol menülerini ve sunucu kurallarını doğrudan Discord'dan yapılandırın.",
         cta: "Kurulum hakkında daha fazla bilgi edinin",
         ctaSlug: "setup",
         mockup: "setup",
       },
       {
         icon: "voice",
-        label: "SES KANALI",
-        title: "Botu sesli kanala davet edin",
+        label: "SOFT-LOFI MÜZİK",
+        title: "Ses kanalında soft-lofi dinleyin",
         description:
-          "/join ve /leave komutlarıyla sharks'ı ses kanalına bağlayın veya çıkarın.",
-        cta: "Komutlar hakkında daha fazla bilgi edinin",
-        ctaSlug: "commands",
-        mockup: "voice",
+          "/lofi komutuyla bulunduğunuz ses kanalında soft-lofi çalar. /music stop veya /leave ile durdurabilirsiniz.",
+        cta: "Müzik hakkında daha fazla bilgi edinin",
+        ctaSlug: "music",
+        mockup: "music",
       },
     ] satisfies FeatureSection[],
   },
@@ -188,8 +189,8 @@ export const tr = {
 
 export const en: Dictionary = {
   meta: {
-    title: "sharks — Discord Moderation Bot",
-    description: "Welcome messages, role menus, moderation tools, and more.",
+    title: "sharks — Discord Community Bot",
+    description: "Welcome messages, role menus, moderation, soft-lofi music, and more.",
   },
   nav: {
     features: "Features",
@@ -226,14 +227,14 @@ export const en: Dictionary = {
     },
     setup: {
       title: "Easy Setup",
-      description: "Configure welcome channels in seconds with /setup.",
+      description: "Configure channels, role menus, and rules from Discord with /setup.",
       href: "#setup",
       icon: "setup" as const,
     },
     voice: {
-      title: "Voice Channel",
-      description: "Invite the bot to voice with /join and /leave.",
-      href: "#voice",
+      title: "Soft-Lofi Music",
+      description: "Listen to soft lofi 24/7 in voice with /lofi.",
+      href: "#music",
       icon: "voice" as const,
     },
   },
@@ -261,7 +262,7 @@ export const en: Dictionary = {
     badge: "Discord Bot",
     title: "Build a Professional Discord Server!",
     subtitle:
-      "Welcome messages, role menus, moderation tools, embedded messages, and useful slash commands — all in one bot.",
+      "Welcome messages, role menus, moderation, soft-lofi music, and useful slash commands — all in one bot.",
     addBot: "Add to Discord",
     browseFeatures: "Browse Features",
   },
@@ -310,22 +311,22 @@ export const en: Dictionary = {
       {
         icon: "setup",
         label: "EASY SETUP",
-        title: "Get set up in seconds",
+        title: "Setup without editing files",
         description:
-          "Configure welcome and leave channels, log channels, and other settings quickly with /setup.",
+          "Use /setup to configure welcome channels, color/gender/role menus, and server rules directly from Discord.",
         cta: "Learn more about setup",
         ctaSlug: "setup",
         mockup: "setup",
       },
       {
         icon: "voice",
-        label: "VOICE CHANNEL",
-        title: "Invite the bot to voice",
+        label: "SOFT-LOFI MUSIC",
+        title: "Listen to soft lofi in voice",
         description:
-          "Connect or disconnect sharks from a voice channel with /join and /leave.",
-        cta: "Learn more about commands",
-        ctaSlug: "commands",
-        mockup: "voice",
+          "Run /lofi in a voice channel to start soft-lofi playback. Stop with /music stop or /leave.",
+        cta: "Learn more about music",
+        ctaSlug: "music",
+        mockup: "music",
       },
     ] satisfies FeatureSection[],
   },

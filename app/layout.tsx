@@ -14,7 +14,7 @@ const geistMono = Geist_Mono({
 
 export const metadata: Metadata = {
   title: "sharks — Discord Bot",
-  description: "Discord community bot with welcome messages, role menus, soft-lofi music, and slash commands.",
+  description: "Discord community bot — welcome, role menus, moderation, soft-lofi, signature embeds, and /language.",
   icons: {
     icon: "/assets/logo.png",
     apple: "/assets/logo.png",

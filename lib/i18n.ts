@@ -25,7 +25,7 @@ export type Dictionary = typeof tr;
 export const tr = {
   meta: {
     title: "sharks — Discord Topluluk Botu",
-    description: "Hoş geldin mesajları, rol menüleri, moderasyon, soft-lofi müzik ve daha fazlası.",
+    description: "Hoş geldin mesajları, rol menüleri, moderasyon, soft-lofi müzik, özgün embed'ler ve /language ile kişisel dil tercihi.",
   },
   nav: {
     features: "Özellikler",
@@ -55,8 +55,8 @@ export const tr = {
       icon: "moderation" as const,
     },
     utility: {
-      title: "Gömülü Mesajlar",
-      description: "Kurallar, bilgi komutları ve şık embed mesajları.",
+      title: "sharks Embed'leri",
+      description: "Kicker, divider ve pastel paletle özgün embed tasarımı.",
       href: "#embed",
       icon: "embed" as const,
     },
@@ -97,7 +97,7 @@ export const tr = {
     badge: "Discord Botu",
     title: "Profesyonel bir Discord Sunucusu Oluşturun!",
     subtitle:
-      "Hoş geldin mesajları, rol menüleri, moderasyon, soft-lofi müzik ve kullanışlı slash komutları — hepsi tek botta.",
+      "Hoş geldin mesajları, rol menüleri, moderasyon, soft-lofi müzik, özgün sharks embed'leri ve `/language` ile kişisel dil — hepsi tek botta.",
     addBot: "Discord'a Ekle",
     browseFeatures: "Özelliklere Göz Atın",
   },
@@ -135,12 +135,12 @@ export const tr = {
       },
       {
         icon: "embed",
-        label: "GÖMÜLÜ MESAJLAR",
-        title: "Sunucunuz için kolayca gömülü mesajlar oluşturun!",
+        label: "SHARKS EMBED'LERİ",
+        title: "Her yanıt özgün bir sharks imzası taşır",
         description:
-          "sharks'ın basit özelleştirmesini kullanarak kurallar, duyurular ve bilgi mesajlarını tercih ettiğiniz kanala gönderin.",
-        cta: "Gömülü mesajlar hakkında daha fazla bilgi edinin",
-        ctaSlug: "commands",
+          "Kicker etiketleri, imza divider çizgisi, pastel renk paleti ve `𝘴𝘩𝘢𝘳𝘬𝘴` footer'ı — hoş geldin, moderasyon, kurulum ve komut yanıtlarında tutarlı bir görünüm.",
+        cta: "Embed tasarımı hakkında daha fazla bilgi edinin",
+        ctaSlug: "embeds",
         mockup: "embed",
       },
       {
@@ -190,7 +190,7 @@ export const tr = {
 export const en: Dictionary = {
   meta: {
     title: "sharks — Discord Community Bot",
-    description: "Welcome messages, role menus, moderation, soft-lofi music, and more.",
+    description: "Welcome messages, role menus, moderation, soft-lofi music, signature embeds, and personal language via /language.",
   },
   nav: {
     features: "Features",
@@ -220,8 +220,8 @@ export const en: Dictionary = {
       icon: "moderation" as const,
     },
     utility: {
-      title: "Embedded Messages",
-      description: "Rules, info commands, and polished embed messages.",
+      title: "sharks Embeds",
+      description: "Signature embed design with kickers, dividers, and a soft pastel palette.",
       href: "#embed",
       icon: "embed" as const,
     },
@@ -262,7 +262,7 @@ export const en: Dictionary = {
     badge: "Discord Bot",
     title: "Build a Professional Discord Server!",
     subtitle:
-      "Welcome messages, role menus, moderation, soft-lofi music, and useful slash commands — all in one bot.",
+      "Welcome messages, role menus, moderation, soft-lofi music, signature sharks embeds, and personal language with `/language` — all in one bot.",
     addBot: "Add to Discord",
     browseFeatures: "Browse Features",
   },
@@ -300,12 +300,12 @@ export const en: Dictionary = {
       },
       {
         icon: "embed",
-        label: "EMBEDDED MESSAGES",
-        title: "Easily create embedded messages for your server!",
+        label: "SHARKS EMBEDS",
+        title: "Every reply carries a signature sharks look",
         description:
-          "Use sharks' simple customization to send rules, announcements, and info messages to any channel you choose.",
-        cta: "Learn more about embedded messages",
-        ctaSlug: "commands",
+          "Kicker labels, signature divider bars, a soft pastel palette, and the `𝘴𝘩𝘢𝘳𝘬𝘴` footer — consistent styling across welcome, moderation, setup, and command replies.",
+        cta: "Learn more about embed design",
+        ctaSlug: "embeds",
         mockup: "embed",
       },
       {

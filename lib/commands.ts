@@ -40,6 +40,13 @@ export const commandGroups: CommandGroup[] = [
       { name: "userinfo", description: { tr: "Kullanıcı bilgilerini gösterir.", en: "Show information about a user." } },
       { name: "serverinfo", description: { tr: "Sunucu bilgilerini gösterir.", en: "Show information about the server." } },
       { name: "avatar", description: { tr: "Profil fotoğrafını gösterir.", en: "Show a user's avatar." } },
+      {
+        name: "language",
+        description: {
+          tr: "Bot dil tercihini ayarlar (tr / en).",
+          en: "Set your preferred bot language (tr / en).",
+        },
+      },
     ],
   },
   {

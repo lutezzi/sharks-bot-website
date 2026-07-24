@@ -35,6 +35,7 @@ export const docNavGroups: DocNavGroup[] = [
       { slug: "moderation", title: { tr: "Moderasyon", en: "Moderation" } },
       { slug: "role-menus", title: { tr: "Rol Menüleri", en: "Role Menus" } },
       { slug: "welcome", title: { tr: "Hoş Geldin Mesajları", en: "Welcome Messages" } },
+      { slug: "embeds", title: { tr: "sharks Embed'leri", en: "sharks Embeds" } },
       { slug: "music", title: { tr: "Soft-Lofi Müzik", en: "Soft-Lofi Music" } },
     ],
   },
@@ -70,6 +71,7 @@ export const docPages: DocPage[] = [
             "Ban, kick, mute ve mesaj temizleme ile moderasyon yapmak",
             "Ses kanalında `/lofi` ile soft-lofi müzik dinlemek",
             "Kurallar, userinfo, serverinfo gibi bilgi komutlarını kullanmak",
+            "`/language tr` veya `/language en` ile bot yanıtlarını kişisel diline çevirmek",
           ],
         },
         {
@@ -96,6 +98,7 @@ export const docPages: DocPage[] = [
             "Moderate with ban, kick, mute, and message clearing",
             "Listen to soft lofi in voice with `/lofi`",
             "Use info commands like rules, userinfo, and serverinfo",
+            "Switch bot replies to your language with `/language tr` or `/language en`",
           ],
         },
         {
@@ -251,7 +254,7 @@ export const docPages: DocPage[] = [
     content: {
       tr: [
         {
-          paragraphs: ["sharks 20 slash komutu sunar. Komutlar üç kategoriye ayrılır:"],
+          paragraphs: ["sharks 21 slash komutu sunar. Komutlar üç kategoriye ayrılır:"],
         },
         {
           heading: "Moderasyon",
@@ -269,6 +272,7 @@ export const docPages: DocPage[] = [
             "/userinfo",
             "/serverinfo",
             "/avatar",
+            "/language",
           ],
         },
         {
@@ -281,7 +285,7 @@ export const docPages: DocPage[] = [
       ],
       en: [
         {
-          paragraphs: ["sharks offers 20 slash commands divided into three categories:"],
+          paragraphs: ["sharks offers 21 slash commands divided into three categories:"],
         },
         {
           heading: "Moderation",
@@ -299,6 +303,7 @@ export const docPages: DocPage[] = [
             "/userinfo",
             "/serverinfo",
             "/avatar",
+            "/language",
           ],
         },
         {
@@ -323,8 +328,9 @@ export const docPages: DocPage[] = [
         {
           heading: "Ban / Unban",
           paragraphs: [
-            "/ban user:@kullanıcı reason:sebep — Kullanıcıyı sunucudan yasaklar.",
+            "/ban user:@kullanıcı reason:sebep delete-days:7 — Kullanıcıyı sunucudan yasaklar (isteğe bağlı mesaj silme günü 0–7).",
             "/unban user-id:123456789 — Kullanıcının yasağını kaldırır (kullanıcı ID gerekir).",
+            "Ban işlemi kanala imza moderasyon embed'i gönderir; komutu kullanan moderatöre gizli onay gider.",
           ],
         },
         {
@@ -349,8 +355,9 @@ export const docPages: DocPage[] = [
         {
           heading: "Ban / Unban",
           paragraphs: [
-            "/ban user:@user reason:reason — Bans a user from the server.",
+            "/ban user:@user reason:reason delete-days:7 — Bans a user (optional message delete days 0–7).",
             "/unban user-id:123456789 — Removes a ban (requires user ID).",
+            "Ban posts a signature moderation embed in channel; the moderator gets a private confirmation.",
           ],
         },
         {
@@ -391,7 +398,7 @@ export const docPages: DocPage[] = [
           heading: "Renk menüsü",
           paragraphs: [
             "1. Sunucuda renk rolleri oluşturun",
-            "2. `/setup color-menu add role:@rol label:etiket hex:#RRGGBB` ile ekleyin",
+            "2. `/setup color-menu add role:@rol label:etiket hex:#RRGGBB` ile ekleyin — bot rol rengini hex ile senkronize eder",
             "3. `/color-menu` komutunu menüyü göndermek istediğiniz kanalda çalıştırın",
           ],
           code: "/setup color-menu add role:@matcha label:matcha hex:#A8C69F emoji:🍈",
@@ -423,7 +430,7 @@ export const docPages: DocPage[] = [
           heading: "Color menu",
           paragraphs: [
             "1. Create color roles in your server",
-            "2. Add with `/setup color-menu add role:@role label:label hex:#RRGGBB`",
+            "2. Add with `/setup color-menu add role:@role label:label hex:#RRGGBB` — the bot syncs role color to the hex value",
             "3. Run `/color-menu` in the channel where you want the menu",
           ],
           code: "/setup color-menu add role:@matcha label:matcha hex:#A8C69F emoji:🍈",
@@ -458,7 +465,7 @@ export const docPages: DocPage[] = [
       tr: [
         {
           paragraphs: [
-            "Bir üye sunucuya katıldığında veya ayrıldığında sharks otomatik embed mesaj gönderir.",
+            "Bir üye sunucuya katıldığında veya ayrıldığında sharks otomatik **sharks embed** mesaj gönderir — avatar, üye sayısı ve imza tasarım öğeleriyle.",
           ],
         },
         {
@@ -471,14 +478,14 @@ export const docPages: DocPage[] = [
         {
           heading: "Metinleri özelleştirme",
           paragraphs: [
-            "Hoş geldin ve ayrılma mesaj metinleri bot geliştiricisi tarafından yönetilir. Sunucu kuralları ise `/setup rules` komutları ile sunucunuza özel ayarlanır.",
+            "Hoş geldin ve ayrılma mesaj metinleri bot geliştiricisi tarafından yönetilir. Sunucu kuralları ise `/setup rules` komutları ile sunucunuza özel ayarlanır ve `/rules` komutuyla sharks embed formatında gösterilir.",
           ],
         },
       ],
       en: [
         {
           paragraphs: [
-            "When a member joins or leaves your server, sharks sends an automatic embed message.",
+            "When a member joins or leaves your server, sharks sends an automatic **sharks embed** — with avatar, member count, and signature design elements.",
           ],
         },
         {
@@ -491,7 +498,7 @@ export const docPages: DocPage[] = [
         {
           heading: "Customizing text",
           paragraphs: [
-            "Welcome and leave message text is managed by the bot developer. Server rules are configured per server with `/setup rules` commands.",
+            "Welcome and leave message text is managed by the bot developer. Server rules are configured per server with `/setup rules` and displayed in sharks embed format via `/rules`.",
           ],
         },
       ],
@@ -522,8 +529,15 @@ export const docPages: DocPage[] = [
         {
           heading: "Veri saklama",
           paragraphs: [
-            "Sunucu bazlı ayarlar bot sunucusunda `data/settings.json` dosyasında saklanır. Her sunucunun ayarları birbirinden bağımsızdır.",
+            "Sunucu bazlı ayarlar bot sunucusunda `data/settings.json` dosyasında saklanır. Her sunucunun ayarları birbirinden bağımsızdır. Kullanıcı dil tercihleri de aynı dosyada `_users` altında tutulur.",
           ],
+        },
+        {
+          heading: "Dil tercihi",
+          paragraphs: [
+            "Her kullanıcı `/language tr` veya `/language en` ile bot yanıtlarının dilini seçebilir. Tercih kişiseldir; komut açıklamaları Discord'da görünen dilden bağımsız olarak yanıt metinlerini etkiler.",
+          ],
+          code: "/language code:tr",
         },
         {
           heading: "Müzik",
@@ -549,13 +563,98 @@ export const docPages: DocPage[] = [
         {
           heading: "Data storage",
           paragraphs: [
-            "Per-server settings are stored in `data/settings.json` on the bot host. Each guild's settings are independent.",
+            "Per-server settings are stored in `data/settings.json` on the bot host. Each guild's settings are independent. User language preferences are stored under `_users` in the same file.",
           ],
+        },
+        {
+          heading: "Language preference",
+          paragraphs: [
+            "Each user can run `/language tr` or `/language en` to choose the language for bot replies. The preference is personal and affects response text, not Discord's slash command description language.",
+          ],
+          code: "/language code:en",
         },
         {
           heading: "Music",
           paragraphs: [
             "Soft-lofi stream sources are managed by the bot developer; server admins do not need separate music configuration.",
+          ],
+        },
+      ],
+    },
+  },
+  {
+    slug: "embeds",
+    title: { tr: "sharks Embed'leri", en: "sharks Embeds" },
+    description: {
+      tr: "Botun özgün embed tasarım dili ve kullanıldığı yerler.",
+      en: "The bot's signature embed design language and where it appears.",
+    },
+    content: {
+      tr: [
+        {
+          paragraphs: [
+            "sharks, düz metin yerine tüm komut yanıtlarında ve otomatik mesajlarda tutarlı bir embed tasarımı kullanır. Bu görünüm diğer botlardan ayrışacak şekilde tasarlanmıştır.",
+          ],
+        },
+        {
+          heading: "Tasarım öğeleri",
+          list: [
+            "Author: 🦈 sharks",
+            "Footer: 𝘴𝘩𝘢𝘳𝘬𝘴",
+            "Kicker: ✦ KATEGORİ (ör. KURULUM, MODERASYON, LOFI MOD)",
+            "Divider: ▰▱▰▱▰▱▰▰▰▱▰▱▰▱▱",
+            "Başlık çerçevesi: ┊ ikon Başlık ┊",
+            "Alan öneki: ▸",
+          ],
+        },
+        {
+          heading: "Renk paleti",
+          paragraphs: [
+            "Her bağlam için pastel tonlar kullanılır: başarı (yeşil), hata (kırmızı), uyarı (sarı), bilgi (mavi), moderasyon, müzik, ses, roller ve kurulum.",
+          ],
+        },
+        {
+          heading: "Nerede görünür?",
+          list: [
+            "Hoş geldin / ayrılma mesajları",
+            "Moderasyon log embed'leri (kanalda)",
+            "Rol menüsü embed'leri (/color-menu, /gender-menu, /role-menu)",
+            "/rules, /help, /userinfo, /serverinfo, /avatar yanıtları",
+            "Komut onay ve hata mesajları (gizli yanıtlar dahil)",
+          ],
+        },
+      ],
+      en: [
+        {
+          paragraphs: [
+            "sharks uses a consistent embed design across command replies and automatic messages instead of plain text. The look is crafted to stand apart from typical Discord bots.",
+          ],
+        },
+        {
+          heading: "Design elements",
+          list: [
+            "Author: 🦈 sharks",
+            "Footer: 𝘴𝘩𝘢𝘳𝘬𝘴",
+            "Kicker: ✦ CATEGORY (e.g. SETUP, MODERATION, LOFI MODE)",
+            "Divider: ▰▱▰▱▰▱▰▰▰▱▰▱▰▱▱",
+            "Framed title: ┊ icon Title ┊",
+            "Field prefix: ▸",
+          ],
+        },
+        {
+          heading: "Color palette",
+          paragraphs: [
+            "Soft pastel tones per context: success, error, warning, info, moderation, music, voice, roles, and setup.",
+          ],
+        },
+        {
+          heading: "Where it appears",
+          list: [
+            "Welcome / leave messages",
+            "Moderation log embeds (in channel)",
+            "Role menu embeds (/color-menu, /gender-menu, /role-menu)",
+            "/rules, /help, /userinfo, /serverinfo, /avatar replies",
+            "Command confirmations and errors (including ephemeral replies)",
           ],
         },
       ],
